@@ -1,46 +1,35 @@
 using InterviewApiDemo.Models;
 using RabbitMQ.Client;
+using System.Data.Common;
 using System.Text;
 using System.Text.Json;
 
 namespace InterviewApiDemo.Services;
 
+// https://www.rabbitmq.com/tutorials/tutorial-one-dotnet
 public class RabbitService()
 {
-    // CloudAMQP URL in format amqp://user:pass@hostName:port/vhost
-    private static readonly string _url = "amqp://guest:guest@localhost/%2f";
+    public static string ConnectionString = string.Empty;
 
     public async Task SendUserCreatedAsync(User user)
     {
 		try
 		{
-            // Create a ConnectionFactory and set the Uri to the CloudAMQP url
-            // the connectionfactory is stateless and can safetly be a static resource in your app
-            var factory = new ConnectionFactory
-            {
-                Uri = new Uri(_url)
-            };
+            // https://www.rabbitmq.com/docs/download
+            // var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { Uri = new Uri(ConnectionString) };
 
-            // create a connection and open a channel, dispose them when done
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
 
-            // ensure that the queue exists before we publish to it
-            var queueName = "queue1";
-            bool durable = false;
-            bool exclusive = false;
-            bool autoDelete = true;
+            await channel.QueueDeclareAsync(queue: "hello", durable: true, exclusive: false, autoDelete: false,
+                arguments: new Dictionary<string, object?> { { "x-queue-type", "quorum" } });
 
-            await channel.QueueDeclareAsync(queueName, durable, exclusive, autoDelete, null);
+            string message = JsonSerializer.Serialize(user);
+            var body = Encoding.UTF8.GetBytes(message);
 
-            // the data put on the queue must be a byte array
-            var data = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(user));
-
-            // publish to the "default exchange", with the queue name as the routing key
-            var exchangeName = "";
-            var routingKey = queueName;
-            // await channel.BasicPublishAsync(exchangeName, routingKey, null, data);
-		}
+            await channel.BasicPublishAsync(exchange: string.Empty, routingKey: "hello", body: body);
+        }
 		catch (Exception)
 		{
             // log the exception

@@ -11,6 +11,9 @@ internal static class DependencyInjection
         services.AddTransient<UsersService>();
         services.AddTransient<RabbitService>();
 
+        RabbitService.ConnectionString = configuration.GetConnectionString(Constants.ApiDemoRabbitConnection)
+            ?? throw new InvalidOperationException($"Connection string with name '{Constants.ApiDemoRabbitConnection}' not found");
+
         services.AddDatabase(configuration);
     }
 
@@ -18,8 +21,8 @@ internal static class DependencyInjection
     // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-10.0&tabs=windows
     private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString(Constants.DbName)
-            ?? throw new InvalidOperationException($"Connection string with name '{Constants.DbName}' not found");
+        var connectionString = configuration.GetConnectionString(Constants.ApiDemoDbConnection)
+            ?? throw new InvalidOperationException($"Connection string with name '{Constants.ApiDemoDbConnection}' not found");
 
         // Application db context
         services.AddDbContextFactory<ApplicationDbContext>(options =>

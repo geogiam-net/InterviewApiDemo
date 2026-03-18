@@ -5,3 +5,5 @@
 /src/ApiProject/bin/Debug/net10.0
 /.vs
 /src/ApiProject/obj
+/RabbitClient/bin/Debug/net10.0
+/RabbitClient/obj

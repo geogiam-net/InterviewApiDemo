@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="RabbitClient/RabbitClient.csproj" Id="f4f40695-5efd-4a75-9ffc-c8479ab2047f" />
   <Project Path="src/ApiProject/ApiProject.csproj" />
 </Solution>

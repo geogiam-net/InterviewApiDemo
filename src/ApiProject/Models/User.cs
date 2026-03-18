@@ -16,5 +16,5 @@ public class User
 
     [Required]
     [UserDateOfBirthValidation]
-    public DateTime DateOfBirth { get; set; } = default;
+    public DateOnly DateOfBirth { get; set; } = default;
 }
