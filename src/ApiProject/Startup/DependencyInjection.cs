@@ -9,6 +9,7 @@ internal static class DependencyInjection
     public static void AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<UsersService>();
+        services.AddTransient<RabbitService>();
 
         services.AddDatabase(configuration);
     }

@@ -9,10 +9,12 @@ namespace InterviewApiDemo.Controllers;
 public class UserController : ControllerBase
 {
     private readonly UsersService _usersService;
+    private readonly RabbitService _rabbitService;
 
-    public UserController(UsersService usersService)
+    public UserController(UsersService usersService, RabbitService rabbitService)
     {
         _usersService = usersService;
+        _rabbitService = rabbitService;
     }
 
     // dateOfBirth must be in ISO 8601 date format (e.g. "2000-12-31")
@@ -24,6 +26,8 @@ public class UserController : ControllerBase
         try
         {
             await _usersService.AddUserAsync(user);
+
+            await _rabbitService.SendUserCreatedAsync(user);
 
             // return 201 with link to created resource, because there is nothing new to return
             // https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-10.0&tabs=visual-studio#update-the-posttodoitem-create-method
