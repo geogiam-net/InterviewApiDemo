@@ -1,0 +1,62 @@
+Task:
+
+Design a REST API for creating and retrieving users. A user has:
+
+- a unique username
+- a name
+- a date of birth
+
+Requirements:
+
+1. When creating a user, it must be verified that the user is at least 16 years old.
+
+2. The user should be persisted (technology optional).
+
+3. After successful creation, an event should be sent via RabbitMQ, informing other services about the new user.
+
+Expected result:
+
+A complete system is not expected. Please provide:
+
+- an architectural overview (briefly sketched or as a diagram)
+- domain and service models
+- an API design (e.g., endpoints, examples)
+- a partial implementation
+
+Programming language and frameworks:
+
+Framework: .NET 10, ASP.NET Core
+Programming language: C#
+Persistent layer/database: Optional
+
+===========================================================================
+
+Aufgabe:
+
+Entwerfen Sie eine REST‑API, mit der Benutzer angelegt und abgerufen werden können. Ein Benutzer besitzt:
+
+-   eindeutigen Benutzernamen
+-   Namen
+-   Geburtsdatum
+
+Anforderungen:
+
+1.   Beim Anlegen muss geprüft werden, dass der Benutzer mindestens 16 Jahre alt ist.
+2.  Der Benutzer soll persistiert werden (Technologie frei wählbar).
+3.  Nach erfolgreicher Anlage soll ein Event über RabbitMQ versendet werden, das andere Services über den neuen Benutzer informiert.
+
+Erwartetes Ergebnis:
+
+Es wird kein vollständiges System erwartet. Bitte liefern Sie:
+
+-   Architekturüberblick (kurz skizziert oder als Diagramm)
+-   Domain‑ und Servicemodelle
+-   API‑Design (z. B. Endpunkte, Beispiele)
+-   Teilimplementierung
+
+Programmiersprache und Frameworks: 
+
+Framework: .NET 10, ASP.NET Core 
+Programmiersprache: C# 
+Persistent Layer/Datenbank: Freigestellt
+

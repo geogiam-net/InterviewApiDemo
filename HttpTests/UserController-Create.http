@@ -1,0 +1,61 @@
+@HostAddress = http://localhost:5180
+
+### Ok request
+
+POST {{HostAddress}}/api/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "DonQX",
+  "name": "Don Quijote de la Mancha",
+  "dateOfBirth": "2000-06-15"
+}
+
+### Test Posting a user that already exists
+
+POST {{HostAddress}}/api/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "DonQX",
+  "name": "Don Quijote de la Mancha",
+  "dateOfBirth": "2000-06-15"
+}
+
+### Test Posting an invalid username
+
+POST {{HostAddress}}/api/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "123",
+  "name": "Don Quijote de la Mancha",
+  "dateOfBirth": "2000-06-15"
+}
+
+### Test Posting an invalid name
+
+POST {{HostAddress}}/api/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "DonQX2",
+  "name": "",
+  "dateOfBirth": "2000-06-15"
+}
+
+### Test Posting an under age user
+
+POST {{HostAddress}}/api/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "DonQX2",
+  "name": "Don Quijote de la Mancha",
+  "dateOfBirth": "2014-06-15"
+}

@@ -1,0 +1,13 @@
+@HostAddress = http://localhost:5180
+
+### Ok request
+
+GET {{HostAddress}}/api/users/DonQX
+Content-Type: application/json
+Accept: application/json
+
+### Test getting not existent user
+
+GET {{HostAddress}}/api/users/qwerty
+Content-Type: application/json
+Accept: application/json
