@@ -1,35 +1,31 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This a small Demo of a web api project to show my skill and knowledge, of course there is still more than one could add in real software, like unit tests, loggers, translators, more services, etc, that is out of the scope and requirements.
+Now that I mention the requirements, it was asked to use RabbitMQ, since I didn't knew the library, I needed to program a both sender and client to make sure the functionality works, because of that the Demo.RabbitClient project is an optional plus.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+What you need to run the project:
+1.	Install .Net 10
+2.	Install Visual Studio 2026
+3.	Install draw.io to open the diagrams
+4.	Installing SqlServer 2025 is optional 
+5.	Oopening an account with RabbitMQ is optional
+6.	Creating secrets.json for ConnectionStrings is optional
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Out of the box, one only needs to compile the Demo.Api and it should work, it will use mocks as infrastructure.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+To test the web api, one can could use swagger, but I think it is easier to go to Demo.UnitTests -> HttpTests and activate the endpoints with the requests at:
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+* User-Get.http
+* User-Post.http
 
+Some requests are wrong on purpose to test that errors or validations are generated and formed well.
 
+If you want to try to run Demo.Api with real infrastructure, then go to the file Program.cs inside Demo.Api, and switch useMocks to false, then you have to create the connection strings and place them inside secrets.json.
 
+For more information on how to: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-10.0&tabs=windows
 
-Demo.UnitTests
-User-Get.http
-User-Post.http
-
-useMocks = true;
-
-
-secrets.json
+The two required Ids are ApiDemoDb and ApiDemoRabbit, the end result should look like the following:
 
 {
     "ConnectionStrings": {
@@ -38,7 +34,4 @@ secrets.json
     }
 }
 
-
-
-// https://www.rabbitmq.com/docs/download
-// var factory = new ConnectionFactory { HostName = "localhost" };
+If the real infrastructure is set, then one can as well execute the Demo.RabbitClient in parallel to watch the messages arrive.
