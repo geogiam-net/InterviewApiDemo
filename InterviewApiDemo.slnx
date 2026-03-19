@@ -1,8 +1,8 @@
 <Solution>
   <Project Path="src/Domain/Demo.Domain.csproj" Id="0a65597d-26fc-4124-b0ea-e8af832082f2" />
-  <Project Path="src/SqlUserStorage/Demo.SqlStorage.csproj" Id="6d0d02c9-6ee1-462a-8542-d33d50bc404c" />
   <Project Path="src/ApiProject/Demo.Api.csproj" />
   <Project Path="src/RabbitClient/Demo.RabbitClient.csproj" Id="f4f40695-5efd-4a75-9ffc-c8479ab2047f" />
-  <Project Path="src/RabbitService/Demo.RabbitMQ.csproj" Id="99ed9aa2-7d24-457d-8172-4d0f920f65ab" />
+  <Project Path="src/RabbitService/Demo.Infrastructure.RabbitMQ.csproj" Id="99ed9aa2-7d24-457d-8172-4d0f920f65ab" />
+  <Project Path="src/SqlUserStorage/Demo.Infrastructure.SqlStorage.csproj" Id="6d0d02c9-6ee1-462a-8542-d33d50bc404c" />
   <Project Path="src/UnitTests/Demo.UnitTests.csproj" Id="378f75c8-25df-4838-87b0-a387cf42c5a0" />
 </Solution>
