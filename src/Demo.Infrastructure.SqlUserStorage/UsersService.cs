@@ -22,13 +22,13 @@ public class UsersService(ApplicationDbContext dbContext, IMessageBroker message
         var errors = UserValidator.Validate(newUser, timeProvider.GetUtcNow().UtcDateTime);
         if(errors.Length > 0)
         {
-            throw new DomainException(errors);
+            throw new ValidationException(errors);
         }
 
         var existingUser = await GetUserAsync(username);
         if (existingUser is not null)
         {
-            throw new DomainException(["User already exists"]);
+            throw new ValidationException(["User already exists"]);
         }
 
         dbContext.Users.Add(newUser);

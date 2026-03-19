@@ -18,3 +18,16 @@
 /src/UnitTests/bin/Debug/net10.0
 /src/UnitTests/obj
 /InterviewApiDemo.slnLaunch.user
+/src/Demo.ApiProject/bin/Debug/net10.0
+/src/Demo.ApiProject/obj
+/Docs/.$Demo Diagram.drawio.bkp
+/src/Demo.Domain/bin/Debug/net10.0
+/src/Demo.Domain/obj
+/src/Demo.Infrastructure.RabbitService/bin/Debug/net10.0
+/src/Demo.Infrastructure.RabbitService/obj
+/src/Demo.Infrastructure.SqlUserStorage/bin/Debug/net10.0
+/src/Demo.Infrastructure.SqlUserStorage/obj
+/src/Demo.RabbitClient/bin/Debug/net10.0
+/src/Demo.RabbitClient/obj
+/src/Demo.UnitTests/bin/Debug/net10.0
+/src/Demo.UnitTests/obj

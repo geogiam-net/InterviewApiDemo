@@ -14,7 +14,7 @@ What you need to run the project:
 # Build and Test
 Out of the box, one only needs to compile the Demo.Api and it should work, it will use mocks as infrastructure.
 
-To test the web api, one can could use swagger, but I think it is easier to go to Demo.UnitTests -> HttpTests and activate the endpoints with the requests at:
+To test the web api, one can could use swagger, but I think it is easier to go to the HttpTests folder and activate the endpoints with the requests at:
 
 * User-Get.http
 * User-Post.http

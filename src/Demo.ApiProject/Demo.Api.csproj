@@ -13,11 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Demo.Domain.csproj" />
-    <ProjectReference Include="..\Domain\Demo.Domain.csproj" />
-    <ProjectReference Include="..\RabbitService\Demo.Infrastructure.RabbitMQ.csproj" />
-    <ProjectReference Include="..\SqlUserStorage\Demo.Infrastructure.SqlStorage.csproj" />
-    <ProjectReference Include="..\UnitTests\Demo.UnitTests.csproj" />
+    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj" />
+    <ProjectReference Include="..\Demo.Infrastructure.RabbitService\Demo.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Demo.Infrastructure.SqlUserStorage\Demo.Infrastructure.SqlStorage.csproj" />
+    <ProjectReference Include="..\Demo.UnitTests\Demo.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
