@@ -14,10 +14,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Demo.Domain.csproj" />
-    <ProjectReference Include="..\SqlUserStorage\Demo.SqlStorage.csproj" />
     <ProjectReference Include="..\Domain\Demo.Domain.csproj" />
-    <ProjectReference Include="..\RabbitService\Demo.RabbitMQ.csproj" />
-    <ProjectReference Include="..\SqlUserStorage\Demo.SqlStorage.csproj" />
+    <ProjectReference Include="..\RabbitService\Demo.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\SqlUserStorage\Demo.Infrastructure.SqlStorage.csproj" />
     <ProjectReference Include="..\UnitTests\Demo.UnitTests.csproj" />
   </ItemGroup>
 
