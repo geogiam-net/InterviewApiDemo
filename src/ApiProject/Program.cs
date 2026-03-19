@@ -6,7 +6,7 @@ using Demo.Domain.Interfaces;
 using Demo.UnitTests.Mocks;
 using Demo.Api.Exceptions;
 
-var useMocks = false;
+var useMocks = true;
 
 var builder = WebApplication.CreateBuilder(args);
 

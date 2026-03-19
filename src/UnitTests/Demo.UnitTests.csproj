@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Fakes\" />
-    <Folder Include="Tests\" />
+    <Compile Remove="Fakes\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Fakes\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Fakes\**" />
+    <None Remove="Tests\**" />
   </ItemGroup>
 
   <ItemGroup>
