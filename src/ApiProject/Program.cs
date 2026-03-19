@@ -1,29 +1,65 @@
-using InterviewApiDemo.Endpoints;
-using InterviewApiDemo.Startup;
+using Demo.Api.Endpoints;
+using Demo.Api.Startup;
+using Demo.Infrastructure.RabbitMQ;
+using Demo.Infrastructure.SqlStorage;
+using Demo.Domain.Interfaces;
+using Demo.UnitTests.Mocks;
+using Demo.Api.Exceptions;
+
+var useMocks = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddSingleton(TimeProvider.System);
+
+if (useMocks) {
+    builder.Services.AddSingleton<IUserRepository>(new UserRepositoryMock(new MessageBrokerMock(), TimeProvider.System));
+    builder.Services.AddSingleton<IMessageBroker>(new MessageBrokerMock());
+}
+else {
+    builder.Services.AddDatabase(builder.Configuration);
+    builder.Services.AddRabbit(builder.Configuration);
+}
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<DomainExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();
 
-app.RunDatabaseMigrations();
+if (!useMocks)
+{
+    app.RunDatabaseMigrations();
+}
+
+// not needed for this demo, but in production you should use https and authorization
+// app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
 }
 
-// app.UseHttpsRedirection();
-// app.UseAuthorization();
+// UseStatusCodePages enables middleware that provides default responses for HTTP status codes
+// (like 404, 400, 500) when your API does not return a body
+app.UseStatusCodePages();
+app.UseExceptionHandler();
 
-app.MapGet("/", () => "Hello InterviewApiDemo!");
+app.MapUserEndpoints();
 
-UserEndpoints.MapUserEndpoints(app);
+// not needed for this demo, but in production you should use https and authorization
+// app.UseAuthorization(); 
 
 app.Run();

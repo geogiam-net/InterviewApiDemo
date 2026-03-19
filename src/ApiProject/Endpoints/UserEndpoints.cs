@@ -1,75 +1,33 @@
-using InterviewApiDemo.Models;
-using InterviewApiDemo.Services;
-using Microsoft.EntityFrameworkCore;
+using Demo.Api.Dtos;
+using Demo.Domain.Interfaces;
 
-namespace InterviewApiDemo.Endpoints;
+namespace Demo.Api.Endpoints;
 
-public static class UserEndpoints
+internal static class UserEndpoints
 {
-    internal static void MapUserEndpoints(WebApplication app)
+    internal static void MapUserEndpoints(this IEndpointRouteBuilder builder)
     {
-        app.MapPost(pattern: "/api/users", handler:
-          async Task<IResult> (User user, UsersService usersService, RabbitService rabbitService) =>
+        builder.MapPost("/api/users", 
+            async Task<IResult> (UserDto user, IUserRepository userRepository) =>
           {
-              try
-              {
+              await userRepository.AddUserAsync(user.Username, user.Name, user.DateOfBirth);
 
-
-
-
-
-
-                  await usersService.AddUserAsync(user);
-
-                  await rabbitService.SendUserCreatedAsync(user);
-
-                  // return 201 with link to created resource, because there is nothing new to return
-                  return TypedResults.Created(
-                    uri: $"/api/users/{user.Username}",
-                    value: user);
-              }
-              catch (DbUpdateException)
-              {
-                  //// return error in Microsoft Error format
-                  //// https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.validationproblemdetails?view=aspnetcore-10.0
-
-                  //var error = new ValidationProblemDetails
-                  //{
-                  //    Type = "https://tools.ietf.org/html/rfc9110#section-15.5.10",
-                  //    Title = $"{user.Username} already exists.",
-                  //    Status = 409
-                  //};
-                  //error.Errors.Add("Username", [error.Title]);
-
-                  //// return StatusCode(409, error);
-
-                  // error 409 would be better
-                  return TypedResults.BadRequest($"{user.Username} already exists.");
-              }
-              catch
-              {
-                  return TypedResults.InternalServerError();
-              }
+              // return 201 with link to created resource, because there is nothing new to return
+              return TypedResults.Created(
+                uri: $"/api/users/{user.Username}",
+                value: user);
           });
 
-        app.MapGet(pattern: "/api/users/{username}", handler:
-          async Task<IResult> (string username, UsersService usersService) =>
+        builder.MapGet("/api/users/{username}",
+            async Task<IResult> (string username, IUserRepository userRepository) =>
           {
-              try
+              var user = await userRepository.GetUserAsync(username);
+              if (user is null)
               {
-                  var user = await usersService.GetUserAsync(username);
-                  if (user is null)
-                  {
-                      return TypedResults.NotFound();
-                  }
+                  return TypedResults.NotFound();
+              }
 
-                  return TypedResults.Ok(user);
-              }
-              catch
-              {
-                  return TypedResults.InternalServerError();
-              }
+              return TypedResults.Ok(new UserDto(user));
           });
     }
-
 }

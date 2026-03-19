@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace InterviewApiDemo.Data.Migrations
+namespace Demo.SqlStorage.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,14 +19,22 @@ namespace InterviewApiDemo.Data.Migrations
                 schema: "app",
                 columns: table => new
                 {
-                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Username);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                schema: "app",
+                table: "Users",
+                column: "Username");
         }
 
         /// <inheritdoc />

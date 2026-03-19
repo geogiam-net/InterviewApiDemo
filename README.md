@@ -18,3 +18,27 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+
+
+
+Demo.UnitTests
+User-Get.http
+User-Post.http
+
+useMocks = true;
+
+
+secrets.json
+
+{
+    "ConnectionStrings": {
+	    "ApiDemoDb": "Server=.......",
+	    "ApiDemoRabbit": "amqps://......."
+    }
+}
+
+
+
+// https://www.rabbitmq.com/docs/download
+// var factory = new ConnectionFactory { HostName = "localhost" };

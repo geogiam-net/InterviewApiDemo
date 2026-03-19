@@ -7,3 +7,14 @@
 /src/ApiProject/obj
 /RabbitClient/bin/Debug/net10.0
 /RabbitClient/obj
+/src/Domain/bin/Debug/net10.0
+/src/Domain/obj
+/src/RabbitClient/bin/Debug/net10.0
+/src/RabbitClient/obj
+/src/RabbitService/bin/Debug/net10.0
+/src/RabbitService/obj
+/src/SqlUserStorage/bin/Debug/net10.0
+/src/SqlUserStorage/obj
+/src/UnitTests/bin/Debug/net10.0
+/src/UnitTests/obj
+/InterviewApiDemo.slnLaunch.user

@@ -1,0 +1,4 @@
+
+dotnet tool update --global dotnet-ef
+
+dotnet ef migrations add Initial --project src\SqlUserStorage --startup-project src\ApiProject --output-dir Data\Migrations
