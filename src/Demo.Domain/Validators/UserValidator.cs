@@ -33,12 +33,12 @@ public static class UserValidator
 
     public static string[] ValidateName(User user)
     {
-        if (string.IsNullOrWhiteSpace(user.Username))
+        if (string.IsNullOrWhiteSpace(user.Name))
         {
             return ["The 'Name' is required"];
         }
 
-        if (user.Username.Length < 2 || user.Username.Length > 80)
+        if (user.Name.Length < 2 || user.Name.Length > 80)
         {
             return ["The 'Name' has to be between 2 and 80 characters long"];
         }
